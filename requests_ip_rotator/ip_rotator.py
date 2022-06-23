@@ -1,3 +1,5 @@
+import uuid
+
 import boto3
 import botocore.exceptions
 import requests as rq
@@ -39,7 +41,8 @@ class ApiGateway(rq.adapters.HTTPAdapter):
             self.site = site
         self.access_key_id = access_key_id
         self.access_key_secret = access_key_secret
-        self.api_name = site + " - IP Rotate API"
+        self.__uuid = uuid.uuid4()
+        self.api_name = site + fr" - IP Rotate API({self.__uuid})"
         self.regions = regions
 
     # Enter and exit blocks to allow "with" clause
